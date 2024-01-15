@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://idutu6ugjd6r"]
+
+[sub_resource type="Gradient" id="Gradient_ux4v6"]
+offsets = PackedFloat32Array(0, 0.894118, 1)
+colors = PackedColorArray(0.799525, 0.273556, 0.306155, 1, 0.805421, 0.294922, 0.326563, 0.970588, 0.803922, 0.294118, 0.32549, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ovg7"]
+gradient = SubResource("Gradient_ux4v6")
+
+[sub_resource type="Curve" id="Curve_tdo1p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.860595, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5fpo7"]
+curve = SubResource("Curve_tdo1p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ailbc"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -10, 0)
+scale_curve = SubResource("CurveTexture_5fpo7")
+color_ramp = SubResource("GradientTexture1D_0ovg7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fksgp"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_hnsr0"]
+material = SubResource("StandardMaterial3D_fksgp")
+
+[node name="ClickParticles" type="GPUParticles3D"]
+emitting = false
+amount = 10
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_ailbc")
+draw_pass_1 = SubResource("QuadMesh_hnsr0")
