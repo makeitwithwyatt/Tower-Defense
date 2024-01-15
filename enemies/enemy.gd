@@ -67,6 +67,8 @@ func _input(event):
 					damage(1)
 
 func damage(amount: int):
+	if health <= 0:
+		return
 	var particles = click_particle_scene.instantiate()
 	get_parent().add_child(particles)
 	particles.global_position = global_position

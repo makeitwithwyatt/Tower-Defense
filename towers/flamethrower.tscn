@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://psyuryugvxoo"]
+[gd_scene load_steps=29 format=3 uid="uid://psyuryugvxoo"]
 
 [ext_resource type="Script" path="res://towers/flamethrower.gd" id="1_6isbw"]
 
@@ -367,12 +367,21 @@ size = Vector3(3, 10, 10)
 [sub_resource type="SphereShape3D" id="SphereShape3D_1jytn"]
 radius = 15.0
 
-[node name="Flamethrower" type="Node3D" node_paths=PackedStringArray("head", "flame_collider", "flame_particles")]
+[sub_resource type="SphereMesh" id="SphereMesh_xstdh"]
+radius = 15.0
+height = 30.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77r6l"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0392157)
+
+[node name="Flamethrower" type="Node3D" node_paths=PackedStringArray("head", "flame_collider", "flame_particles", "preview_radius")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_6isbw")
 head = NodePath("FlamethrowerTurret/Head")
 flame_collider = NodePath("FlamethrowerTurret/Head/FlameCollider")
 flame_particles = NodePath("FlamethrowerTurret/Head/Flames")
+preview_radius = NodePath("PreviewRadius")
 
 [node name="FlamethrowerTurret" type="Node3D" parent="."]
 
@@ -416,6 +425,10 @@ shape = SubResource("BoxShape3D_xoty2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_1jytn")
+
+[node name="PreviewRadius" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xstdh")
+surface_material_override/0 = SubResource("StandardMaterial3D_77r6l")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

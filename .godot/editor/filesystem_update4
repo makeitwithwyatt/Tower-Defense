@@ -1,5 +1,7 @@
-res://towers/flamethrower.tscn
-res://towers/flamethrower.gd
 res://main.tscn
-res://enemies/EnemySpawner.gd
+res://GameManager.gd
+res://towers/flamethrower.tscn
 res://Builder.gd
+res://CameraFollow.gd
+res://towers/flamethrower.gd
+res://enemies/enemy.gd

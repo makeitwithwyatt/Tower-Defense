@@ -1,3 +1,4 @@
+MeshInstance3D
 Node
 RichTextLabel
 TextureRect
@@ -5,7 +6,6 @@ TextureButton
 Area3D
 CollisionShape3D
 GPUParticles3D
-MeshInstance3D
 SubViewport
 Node3D
 NinePatchRect

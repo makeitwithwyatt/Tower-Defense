@@ -51,10 +51,15 @@ sky = SubResource("Sky_7bhto")
 [node name="Game" type="Node3D"]
 
 [node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_y7g4j")
 
-[node name="Builder" type="Node" parent="GameManager"]
+[node name="Builder" type="Node" parent="GameManager" node_paths=PackedStringArray("camera")]
 script = ExtResource("2_o1u6h")
+turret_scene = ExtResource("15_nbjsr")
+depth = 50.0
+mapSize = 500
+camera = NodePath("../../Camera")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -74,8 +79,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -187.0
-offset_top = -154.0
+offset_left = -376.0
+offset_top = -166.0
 offset_right = -23.0
 offset_bottom = -26.0
 grow_horizontal = 0
@@ -93,27 +98,29 @@ axis_stretch_vertical = 1
 layout_mode = 0
 offset_left = 12.0
 offset_top = 11.0
-offset_right = 145.0
-offset_bottom = 51.0
-text = "Money: 0"
+offset_right = 225.0
+offset_bottom = 68.0
+bbcode_enabled = true
+text = "[font_size=30]Money: 0"
 
 [node name="KillsLabel" type="RichTextLabel" parent="UI/Control/StatPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 45.0
-offset_right = 145.0
-offset_bottom = 85.0
-text = "Kills: 0"
+offset_top = 70.0
+offset_right = 204.0
+offset_bottom = 130.0
+bbcode_enabled = true
+text = "[font_size=30]Kills: 0"
 
 [node name="WavePanel" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -142.0
+offset_left = -293.0
 offset_top = 41.0
-offset_right = 142.0
-offset_bottom = 79.0
+offset_right = 288.0
+offset_bottom = 111.0
 grow_horizontal = 2
 texture = ExtResource("2_b8j28")
 region_rect = Rect2(416, 64, 96, 24)
@@ -124,12 +131,12 @@ patch_margin_right = 40
 [node name="Label" type="RichTextLabel" parent="UI/Control/WavePanel"]
 layout_mode = 0
 offset_top = 11.0
-offset_right = 284.0
-offset_bottom = 39.0
+offset_right = 554.0
+offset_bottom = 64.0
 bbcode_enabled = true
-text = "[center][color=black]Wave 1"
+text = "[center][color=black][font_size=30]Wave 1"
 
-[node name="TextureButton" type="TextureButton" parent="UI/Control"]
+[node name="BuyTurretButton" type="TextureButton" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -137,40 +144,41 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -32.0
-offset_top = -135.0
-offset_right = 29.0
+offset_top = -225.0
+offset_right = 119.0
 offset_bottom = -74.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("3_jrplf")
 texture_pressed = ExtResource("4_abg41")
+stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Control/TextureButton"]
+[node name="TextureRect" type="TextureRect" parent="UI/Control/BuyTurretButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -7.5
-offset_top = -6.5
-offset_right = 12.5
-offset_bottom = 13.5
+offset_left = -20.5
+offset_top = -22.5
+offset_right = 50.5
+offset_bottom = 48.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5_edmnx")
 expand_mode = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/TextureButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/BuyTurretButton"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 3.0
-offset_right = 54.0
-offset_bottom = 30.0
+offset_left = 57.0
+offset_top = 20.0
+offset_right = 116.0
+offset_bottom = 61.0
 mouse_filter = 2
 bbcode_enabled = true
-text = "[color=black]$5"
+text = "[color=black][font_size=24]$5"
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -301,29 +309,6 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q25op")
 
-[node name="Flamethrower" parent="." node_paths=PackedStringArray("head", "flame_collider", "flame_particles") instance=ExtResource("15_nbjsr")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 280, 0, 31)
-head = NodePath("FlamethrowerTurret/Head")
-flame_collider = NodePath("FlamethrowerTurret/Head/FlameCollider")
-flame_particles = NodePath("FlamethrowerTurret/Head/Flames")
-
-[node name="Flamethrower2" parent="." node_paths=PackedStringArray("head", "flame_collider", "flame_particles") instance=ExtResource("15_nbjsr")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 280, 0, 59)
-head = NodePath("FlamethrowerTurret/Head")
-flame_collider = NodePath("FlamethrowerTurret/Head/FlameCollider")
-flame_particles = NodePath("FlamethrowerTurret/Head/Flames")
-
-[node name="Flamethrower3" parent="." node_paths=PackedStringArray("head", "flame_collider", "flame_particles") instance=ExtResource("15_nbjsr")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 280, 0, 84)
-head = NodePath("FlamethrowerTurret/Head")
-flame_collider = NodePath("FlamethrowerTurret/Head/FlameCollider")
-flame_particles = NodePath("FlamethrowerTurret/Head/Flames")
-
-[node name="Flamethrower4" parent="." node_paths=PackedStringArray("head", "flame_collider", "flame_particles") instance=ExtResource("15_nbjsr")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 280, 0, 107)
-head = NodePath("FlamethrowerTurret/Head")
-flame_collider = NodePath("FlamethrowerTurret/Head/FlameCollider")
-flame_particles = NodePath("FlamethrowerTurret/Head/Flames")
-
+[connection signal="pressed" from="UI/Control/BuyTurretButton" to="GameManager/Builder" method="_on_buy_turret_button_pressed"]
 [connection signal="enemy_spawned" from="EnemySpawner" to="GameManager" method="_on_enemy_spawned"]
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
